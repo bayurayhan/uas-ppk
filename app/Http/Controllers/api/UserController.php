@@ -44,6 +44,7 @@ class UserController extends Controller
         request()->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'bio' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -51,6 +52,7 @@ class UserController extends Controller
             'name' => request()->name,
             'email' => request()->email,
             'password' => Hash::make(request()->password),
+            'bio' => request()->bio,
             'role_id' => $this->memberId,
             'email_verified_at' => now(),
         ]);

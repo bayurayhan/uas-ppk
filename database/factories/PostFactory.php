@@ -26,7 +26,7 @@ class PostFactory extends Factory
         return [
             "title" => $title,
             "body" => $post,
-            "author_id" => fake()->numberBetween(1, 20),
+            "author_id" => \App\Models\User::all()->random()->id,
         ];
     }
 }
