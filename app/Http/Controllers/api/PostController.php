@@ -20,6 +20,7 @@ class PostController extends Controller
         // Check if the authenticated user is owner of the post
         foreach ($posts as $post) {
             $post->is_owner = auth()->user()->id === $post->author_id;
+            $post->author = $post->author;
         }
 
         // User usefull response to return data
