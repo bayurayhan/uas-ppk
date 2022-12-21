@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy("updated_at", "desc")->get();
 
         // Check if the authenticated user is owner of the post
         foreach ($posts as $post) {
@@ -54,6 +54,8 @@ class PostController extends Controller
             'author_id' => $user->id
         ]);
 
+        $post->author = $post->author;
+
         // User usefull response to return data
         return response()->json([
             'message' => 'Post created successfully',
@@ -69,6 +71,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->author = $post->author;
+
         // User usefull response to return data
         return response()->json([
             'message' => 'Post retrieved successfully',
@@ -157,6 +161,10 @@ class PostController extends Controller
 
         // Get all posts of the authenticated user
         $posts = $user->posts;
+
+        foreach ($posts as $post) {
+            $post->author = $post->author;
+        }
 
         // User usefull response to return data
         return response()->json([

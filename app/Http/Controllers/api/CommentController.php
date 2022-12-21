@@ -12,7 +12,7 @@ class CommentController extends \App\Http\Controllers\Controller
      * Get all comments for a post
      *
      * @return \Illuminate\Http\Response
-     */   
+     */
     public function index(Post $post)
     {
         $comments = $post->comments;
@@ -20,6 +20,7 @@ class CommentController extends \App\Http\Controllers\Controller
         // Check if the authenticated user is owner of the comment
         foreach ($comments as $comment) {
             $comment->is_owner = auth()->user()->id === $comment->author_id;
+            $comment->author = $comment->author;
         }
 
         return response()->json([
@@ -111,7 +112,7 @@ class CommentController extends \App\Http\Controllers\Controller
                 'message' => 'You are not authorized to delete this comment'
             ], 403);
         }
-        
+
 
         // Delete comment
         $comment->delete();

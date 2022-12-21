@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => '1'], function () {
 
     // Post
     Route::get('posts', [\App\Http\Controllers\api\PostController::class, 'index']); // Get all posts
-    Route::get('posts/{user}', [\App\Http\Controllers\api\PostController::class, 'userPosts']); // Get posts by user
+    Route::get('user-posts', [\App\Http\Controllers\api\PostController::class, 'userPosts']); // Get posts by user
     Route::post('post', [\App\Http\Controllers\api\PostController::class, 'store']); // Create new post
     Route::get('post/{post}', [\App\Http\Controllers\api\PostController::class, 'show']); // Get post by id
     Route::post('post/{post}', [\App\Http\Controllers\api\PostController::class, 'update']); // Update post by id
